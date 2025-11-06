@@ -1,0 +1,5 @@
+res://scenes/grid_buildings/archer_tower/archer_tower.tscn
+res://classes/projectile_spawner.gd
+res://classes/projectile.gd
+res://scenes/grid_buildings/archer_tower/arrow.tscn
+res://scenes/grid_buildings/archer_tower/archer_tower.gd

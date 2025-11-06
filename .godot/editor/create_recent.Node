@@ -1,0 +1,14 @@
+Sprite2D
+CollisionShape2D
+CharacterBody2D
+ProjectileSpawner
+TargetAcquisitionComponent
+HurtBox
+NavigationAgent2D
+TileMapLayer
+VSeparator
+HBoxContainer
+Control
+Label
+CanvasLayer
+Button
