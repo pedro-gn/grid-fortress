@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://biugmvdk2qwrt"]
+
+[ext_resource type="Script" uid="uid://daep320lau0ob" path="res://scenes/grid_slot/grid_slot.gd" id="1_mikuy"]
+
+[node name="GridSlot" type="Node2D"]
+script = ExtResource("1_mikuy")
+
+[node name="MouseDetector" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="gui_input" from="MouseDetector" to="." method="_on_mouse_detector_gui_input"]
+[connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]

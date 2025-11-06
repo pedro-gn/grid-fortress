@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckk4013pg116g"]
+
+[ext_resource type="Script" uid="uid://druiq0som7acq" path="res://UI/buildings_ui/buildings_ui.gd" id="1_nkonj"]
+[ext_resource type="PackedScene" uid="uid://dgg2tfmm1to7t" path="res://UI/building_card_ui/building_card_ui.tscn" id="1_nqh3k"]
+
+[node name="BuildingsUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_nkonj")
+building_card_scene = ExtResource("1_nqh3k")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GridBuildingData" load_steps=4 format=3 uid="uid://da6sp8mbhb45t"]
+
+[ext_resource type="PackedScene" uid="uid://bxn8pplp1bsi1" path="res://scenes/grid_buildings/mage_tower/mage_tower.tscn" id="1_7k7f7"]
+[ext_resource type="Script" uid="uid://dddlhl1uoikaj" path="res://resources/grid_buildings_data.gd" id="1_eeo63"]
+[ext_resource type="Texture2D" uid="uid://cgbyagtsovay5" path="res://sprites/mage_tower.png" id="2_r6uua"]
+
+[resource]
+script = ExtResource("1_eeo63")
+building_name = "Mage Tower"
+sprite = ExtResource("2_r6uua")
+building_scene = ExtResource("1_7k7f7")
+metadata/_custom_type_script = "uid://dddlhl1uoikaj"

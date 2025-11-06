@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b870uxmqx3q0s"]
+
+[ext_resource type="Script" uid="uid://dfbcr6aobf3qs" path="res://classes/projectile.gd" id="1_p85eq"]
+[ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="2_tqcar"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqcar"]
+size = Vector2(17, 5)
+
+[node name="Arrow" type="CharacterBody2D"]
+script = ExtResource("1_p85eq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tqcar")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1, 0.29999998)
+texture = ExtResource("2_tqcar")

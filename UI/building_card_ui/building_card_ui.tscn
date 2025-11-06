@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgg2tfmm1to7t"]
+
+[ext_resource type="Script" uid="uid://piuwovx537u" path="res://UI/building_card_ui/building_card_ui.gd" id="1_iap48"]
+[ext_resource type="Texture2D" uid="uid://cxboff78eridn" path="res://sprites/archer_tower.png" id="2_71kw3"]
+
+[node name="BuildingCardUI" type="VBoxContainer" node_paths=PackedStringArray("_texture_rect", "label")]
+script = ExtResource("1_iap48")
+_texture_rect = NodePath("TextureRect")
+label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+text = "Torre 1"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_71kw3")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Buy"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

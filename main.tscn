@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dygxckdtyhci7"]
+
+[ext_resource type="PackedScene" uid="uid://dik4ntlalso2m" path="res://scenes/grid/grid.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ckk4013pg116g" path="res://UI/buildings_ui/buildings_ui.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://c6ioe07xstj6l" path="res://camera_2d.gd" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cr3eh75sskexx" path="res://scenes/enemies/enemy_base.tscn" id="5_lquwl"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Grid" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(40, 40)
+width = 15
+spacing = Vector2(80, 80)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(595, 394)
+zoom = Vector2(2, 2)
+script = ExtResource("3_lquwl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BuildingsUi" parent="CanvasLayer" instance=ExtResource("2_0xm2m")]
+
+[node name="EnemyBase" parent="." instance=ExtResource("5_lquwl")]
+position = Vector2(8, 8)
+collision_layer = 4
+collision_mask = 0
+motion_mode = 1

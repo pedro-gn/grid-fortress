@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://diu3teuuky7ep"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_1tfd2"]
+[ext_resource type="Texture2D" uid="uid://cxboff78eridn" path="res://sprites/archer_tower.png" id="2_4gesv"]
+[ext_resource type="Script" uid="uid://mru77ii8onyl" path="res://scenes/grid_buildings/archer_tower/archer_tower.gd" id="2_t3dm4"]
+[ext_resource type="Script" uid="uid://kf3lkc6t3ceb" path="res://classes/target_acquisition_area.gd" id="3_8gaa4"]
+[ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="3_ifwe7"]
+[ext_resource type="Script" uid="uid://4oh78on3h55u" path="res://classes/projectile_spawner.gd" id="6_n40eb"]
+[ext_resource type="PackedScene" uid="uid://b870uxmqx3q0s" path="res://scenes/grid_buildings/archer_tower/arrow.tscn" id="7_wcsgq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8gaa4"]
+radius = 203.00246
+
+[node name="ArcherTower" instance=ExtResource("1_1tfd2")]
+script = ExtResource("2_t3dm4")
+
+[node name="TargetAcquisitionComponent" type="Area2D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_8gaa4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAcquisitionComponent" index="0"]
+shape = SubResource("CircleShape2D_8gaa4")
+
+[node name="Shadow" type="Sprite2D" parent="." index="1"]
+modulate = Color(1, 1, 1, 0.3372549)
+position = Vector2(-1.1920929e-06, 26.5)
+scale = Vector2(3.1999998, 1.25)
+texture = ExtResource("3_ifwe7")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_4gesv")
+
+[node name="ProjectileSpawner" type="Node2D" parent="." index="3"]
+script = ExtResource("6_n40eb")
+projectile_scene = ExtResource("7_wcsgq")
+motion_style = 1
+tracking_mode = 0
+metadata/_custom_type_script = "uid://4oh78on3h55u"
