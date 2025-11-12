@@ -1,9 +1,10 @@
-# Projectile.gd
-# Attach this script to your Projectile (CharacterBody2D) root node.
 extends CharacterBody2D
 
+
+
+@export var hit_box : HitBox
+
 # --- Enums from the Spawner ---
-# We mirror them here so the script knows about them.
 enum MotionStyle { STRAIGHT, CURVE }
 enum TrackingMode { HOMING, TARGET_POSITION }
 
@@ -62,6 +63,11 @@ func setup(_target: Node2D, _speed: float, _style: MotionStyle, _tracking: Track
 		# Ensure we are always looking forward
 		rotation = velocity.angle()
 
+func _ready() -> void:
+	hit_box.area_entered.connect(_on_hit_box_area_entered)
+
+func _on_hit_box_area_entered(_area : Area2D):
+	queue_free()
 
 func _physics_process(delta: float):
 	# --- 1. Apply Gravity (for CURVE motion) ---
@@ -79,8 +85,6 @@ func _physics_process(delta: float):
 			tracking_mode = TrackingMode.TARGET_POSITION
 			
 	elif tracking_mode == TrackingMode.TARGET_POSITION:
-		# Non-Homing: Just fly in the initial direction.
-		# Gravity (if any) is already applied.
 		pass
 
 	# --- 3. Update Rotation & Move ---
@@ -90,30 +94,7 @@ func _physics_process(delta: float):
 	
 	move_and_slide()
 
-	# --- 4. Handle Collision with Walls ---
-	# `move_and_slide()` returns true if it collided.
 	if get_slide_collision_count() > 0:
 		# Optional: Ricochet or destroy
 		print("Projectile hit a wall!")
 		queue_free() # Destroy on wall impact
-
-
-# --- 5. Handle Hitbox Detection ---
-# Go to the Node tab for the `Hitbox` Area2D node.
-# Connect its `body_entered` or `area_entered` signal to this function.
-func _on_hitbox_body_entered(body):
-	# Make sure we don't hit ourselves (the spawner)
-	if body == target_node:
-		print("Projectile hit target:", body.name)
-		# --- !!! DEAL DAMAGE HERE !!! ---
-		# Example: if body.has_method("take_damage"):
-		#     body.take_damage(10)
-		
-		queue_free() # Destroy on impact
-	
-	# Optional: Check for other collision layers (e.g., other enemies)
-	elif body in get_tree().get_nodes_in_group("enemies"):
-		if body != target_node: # If it's not our primary target
-			print("Projectile hit OTHER enemy:", body.name)
-			# --- !!! DEAL DAMAGE HERE !!! ---
-			queue_free()

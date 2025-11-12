@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://cvgg1c4ydx3hd"]
+
+[ext_resource type="PackedScene" uid="uid://cr3eh75sskexx" path="res://scenes/enemies/enemy_base.tscn" id="1_t4oa3"]
+[ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="2_i3wcf"]
+[ext_resource type="Texture2D" uid="uid://ydty11unfwfq" path="res://sprites/DebtsInTheDepthsAssets/Characters/sprSkeleton1.png" id="2_me6e6"]
+[ext_resource type="Texture2D" uid="uid://c0plbc5ox432f" path="res://sprites/task_progress_bar_under.png" id="4_ep5l1"]
+[ext_resource type="Texture2D" uid="uid://bs6agkkyprhv6" path="res://sprites/task_progress_bar_progress.png" id="5_j3pxm"]
+[ext_resource type="Script" uid="uid://6n4uc50s0df5" path="res://resources/health.gd" id="6_j3pxm"]
+
+[sub_resource type="Resource" id="Resource_g3bvy"]
+resource_local_to_scene = true
+script = ExtResource("6_j3pxm")
+max_health = 5.0
+metadata/_custom_type_script = "uid://6n4uc50s0df5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4oa3"]
+size = Vector2(12, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3wcf"]
+size = Vector2(12, 15)
+
+[sub_resource type="Animation" id="Animation_g3bvy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flipper/Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_j3pxm"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flipper/Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0.7, 0.25), Vector2(0.8, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_46u6v"]
+_data = {
+&"RESET": SubResource("Animation_g3bvy"),
+&"walk": SubResource("Animation_j3pxm")
+}
+
+[node name="Skeleton" node_paths=PackedStringArray("health_component") instance=ExtResource("1_t4oa3")]
+movement_speed = 50.0
+health_component = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("hurt_box", "health_bar")]
+health_data = SubResource("Resource_g3bvy")
+hurt_box = NodePath("../HurtBox")
+health_bar = NodePath("../TextureProgressBar")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+visible = false
+position = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_t4oa3")
+
+[node name="Shadow" type="Sprite2D" parent="Flipper" index="0"]
+modulate = Color(1.1801987, 1.1801987, 1.1801987, 0.5921569)
+position = Vector2(1, 7)
+scale = Vector2(0.8, 0.25)
+texture = ExtResource("2_i3wcf")
+
+[node name="Sprite2D" parent="Flipper" index="1"]
+position = Vector2(3, 0)
+texture = ExtResource("2_me6e6")
+hframes = 4
+
+[node name="CollisionShape2D" parent="." index="4"]
+visible = false
+position = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_i3wcf")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="5"]
+offset_left = -6.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = -9.0
+value = 50.0
+texture_under = ExtResource("4_ep5l1")
+texture_progress = ExtResource("5_j3pxm")
+tint_under = Color(1, 0, 0, 0.22745098)
+tint_progress = Color(0, 1, 0, 0.6745098)
+
+[node name="AnimationPlayer" parent="." index="6"]
+libraries = {
+&"": SubResource("AnimationLibrary_46u6v")
+}
+autoplay = "walk"

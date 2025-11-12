@@ -13,6 +13,7 @@ radius = 203.00246
 
 [node name="ArcherTower" instance=ExtResource("1_1tfd2")]
 script = ExtResource("2_t3dm4")
+base_fire_rate = 1.0
 
 [node name="TargetAcquisitionComponent" type="Area2D" parent="." index="0"]
 collision_layer = 0

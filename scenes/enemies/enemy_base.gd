@@ -1,30 +1,36 @@
 extends CharacterBody2D
+class_name EnemyBase
 
-var movement_speed: float = 100.0
-var movement_target_position: Vector2 = Vector2(1200, 800)
+
+@export_category("Stats")
+@export var movement_speed: float = 100.0
+@export var tower_damage : float = 1
+
+@export_category("Components")
+@export var health_component : HealthComponent
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
-func _ready():
-	# These values need to be adjusted for the actor's speed
-	# and the navigation layout.
-	navigation_agent.path_desired_distance = 4.0
-	navigation_agent.target_desired_distance = 4.0
 
-	# Make sure to not await during _ready.
+
+func _ready():
+	navigation_agent.path_desired_distance = 4
+	navigation_agent.target_desired_distance = 4.0
+	health_component.died.connect(_on_died)
+		
 	actor_setup.call_deferred()
 
-func actor_setup():
-	# Wait for the first physics frame so the NavigationServer can sync.
-	await get_tree().physics_frame
+func _on_died(_killed_by : Node2D):
+	queue_free()
 
-	# Now that the navigation map is no longer empty, set the movement target.
-	set_movement_target(movement_target_position)
+func actor_setup():
+	await get_tree().physics_frame
+	set_movement_target(get_tree().get_first_node_in_group("Castle").global_position)
 
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if navigation_agent.is_navigation_finished():
 		return
 

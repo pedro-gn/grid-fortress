@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cednbfyjyxvvb"]
+
+[ext_resource type="Script" uid="uid://bivddwmdkrj3n" path="res://scenes/tower/tower.gd" id="1_kks2f"]
+[ext_resource type="Texture2D" uid="uid://bgu2fseyctbd3" path="res://sprites/castle.png" id="2_sjjxt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kks2f"]
+radius = 72.0
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_kks2f")
+tower_max_health = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sjjxt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+z_index = 1
+position = Vector2(-1, 8)
+shape = SubResource("CircleShape2D_kks2f")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

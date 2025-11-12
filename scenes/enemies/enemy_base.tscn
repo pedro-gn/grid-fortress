@@ -1,19 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr3eh75sskexx"]
+[gd_scene load_steps=5 format=3 uid="uid://cr3eh75sskexx"]
 
 [ext_resource type="Script" uid="uid://dfcp3bee2g7u3" path="res://scenes/enemies/enemy_base.gd" id="1_qty17"]
-[ext_resource type="Texture2D" uid="uid://ydty11unfwfq" path="res://sprites/DebtsInTheDepthsAssets/Characters/sprSkeleton1.png" id="2_pkqou"]
 [ext_resource type="Script" uid="uid://cuygmdqedd4pg" path="res://classes/flipper.gd" id="2_qa0nx"]
 [ext_resource type="Script" uid="uid://bhnten3cto7ja" path="res://classes/hurt_box.gd" id="2_xdb20"]
-[ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="3_xdb20"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evjv1"]
-size = Vector2(10, 13)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkqou"]
-size = Vector2(10, 13)
+[ext_resource type="Script" uid="uid://gawocmkasj2q" path="res://classes/health_component.gd" id="4_qa0nx"]
 
 [node name="EnemyBase" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_qty17")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_qa0nx")
+metadata/_custom_type_script = "uid://gawocmkasj2q"
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 8
@@ -21,27 +19,19 @@ collision_mask = 0
 script = ExtResource("2_xdb20")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(2, 0.5)
-shape = SubResource("RectangleShape2D_evjv1")
-debug_color = Color(0.9999998, 0.012463602, 0.04838402, 0.41960785)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0.5)
-shape = SubResource("RectangleShape2D_pkqou")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+path_max_distance = 10.0
+path_postprocessing = 1
+debug_enabled = true
 
 [node name="Flipper" type="Node2D" parent="." node_paths=PackedStringArray("velocity_rigid_body")]
 script = ExtResource("2_qa0nx")
 velocity_rigid_body = NodePath("..")
 
-[node name="ShadowSprite" type="Sprite2D" parent="Flipper"]
-modulate = Color(1, 1, 1, 0.5254902)
-position = Vector2(1, 7)
-scale = Vector2(0.6, 0.2)
-texture = ExtResource("3_xdb20")
+[node name="Sprite2D" type="Sprite2D" parent="Flipper"]
 
-[node name="EnemySprite" type="Sprite2D" parent="Flipper"]
-position = Vector2(3, 0)
-texture = ExtResource("2_pkqou")
-hframes = 4
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -34,8 +34,13 @@ folder_colors={
 "res://globals/": "teal",
 "res://resources/": "purple",
 "res://scenes/": "blue",
+"res://scenes/main/": "teal",
 "res://sprites/": "yellow"
 }
+
+[global_group]
+
+Castle=""
 
 [input]
 
@@ -74,6 +79,7 @@ camera_down={
 
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="EnemiesHurtBox"
+2d_physics/layer_5="Hitbox"
 
 [rendering]
 
