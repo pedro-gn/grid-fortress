@@ -24,7 +24,6 @@ func _on_hurt_box_damage_taken(damage : Damage, damage_dealer : Node2D):
 	health_data.take_damage(damage)
 	health_changed.emit(health_data)
 	
-	
 	if health_bar:
 		health_bar.max_value = health_data.max_health
 		health_bar.value = health_data.current_health

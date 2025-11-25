@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvgg1c4ydx3hd"]
+[gd_scene load_steps=12 format=3 uid="uid://cvgg1c4ydx3hd"]
 
 [ext_resource type="PackedScene" uid="uid://cr3eh75sskexx" path="res://scenes/enemies/enemy_base.tscn" id="1_t4oa3"]
 [ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="2_i3wcf"]
 [ext_resource type="Texture2D" uid="uid://ydty11unfwfq" path="res://sprites/DebtsInTheDepthsAssets/Characters/sprSkeleton1.png" id="2_me6e6"]
-[ext_resource type="Texture2D" uid="uid://c0plbc5ox432f" path="res://sprites/task_progress_bar_under.png" id="4_ep5l1"]
-[ext_resource type="Texture2D" uid="uid://bs6agkkyprhv6" path="res://sprites/task_progress_bar_progress.png" id="5_j3pxm"]
+[ext_resource type="PackedScene" uid="uid://b3tinmrtcut4j" path="res://UI/health_bar/health_bar.tscn" id="5_ep5l1"]
 [ext_resource type="Script" uid="uid://6n4uc50s0df5" path="res://resources/health.gd" id="6_j3pxm"]
 
 [sub_resource type="Resource" id="Resource_g3bvy"]
@@ -84,6 +83,7 @@ _data = {
 
 [node name="Skeleton" node_paths=PackedStringArray("health_component") instance=ExtResource("1_t4oa3")]
 movement_speed = 50.0
+gold_value = 1
 health_component = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("hurt_box", "health_bar")]
@@ -112,16 +112,7 @@ visible = false
 position = Vector2(2, 0.5)
 shape = SubResource("RectangleShape2D_i3wcf")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="5"]
-offset_left = -6.0
-offset_top = -11.0
-offset_right = 12.0
-offset_bottom = -9.0
-value = 50.0
-texture_under = ExtResource("4_ep5l1")
-texture_progress = ExtResource("5_j3pxm")
-tint_under = Color(1, 0, 0, 0.22745098)
-tint_progress = Color(0, 1, 0, 0.6745098)
+[node name="TextureProgressBar" parent="." index="5" instance=ExtResource("5_ep5l1")]
 
 [node name="AnimationPlayer" parent="." index="6"]
 libraries = {

@@ -1,26 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgg2tfmm1to7t"]
+[gd_scene load_steps=4 format=3 uid="uid://dgg2tfmm1to7t"]
 
 [ext_resource type="Script" uid="uid://piuwovx537u" path="res://UI/building_card_ui/building_card_ui.gd" id="1_iap48"]
 [ext_resource type="Texture2D" uid="uid://cxboff78eridn" path="res://sprites/archer_tower.png" id="2_71kw3"]
+[ext_resource type="Texture2D" uid="uid://dx07dhjqhr6v8" path="res://sprites/DebtsInTheDepthsAssets/Environment/sprGoldPile.png" id="3_5l48o"]
 
-[node name="BuildingCardUI" type="VBoxContainer" node_paths=PackedStringArray("_texture_rect", "label")]
+[node name="BuildingCardUI" type="PanelContainer" node_paths=PackedStringArray("_texture_rect", "name_label", "price_label")]
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 141.0
+offset_bottom = 201.0
 script = ExtResource("1_iap48")
-_texture_rect = NodePath("TextureRect")
-label = NodePath("RichTextLabel")
+_texture_rect = NodePath("BuildingCardUI/BuildingCardUI/CenterContainer/TextureRect")
+name_label = NodePath("BuildingCardUI/BuildingCardUI/RichTextLabel")
+price_label = NodePath("BuildingCardUI/BuildingCardUI/HBoxContainer/RichTextLabel2")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="BuildingCardUI" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BuildingCardUI" type="VBoxContainer" parent="BuildingCardUI"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BuildingCardUI/BuildingCardUI"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 16
 text = "Torre 1"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="BuildingCardUI/BuildingCardUI"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BuildingCardUI/BuildingCardUI/CenterContainer"]
 layout_mode = 2
 texture = ExtResource("2_71kw3")
+stretch_mode = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="BuildingCardUI/BuildingCardUI"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="BuildingCardUI/BuildingCardUI/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+text = "9"
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="BuildingCardUI/BuildingCardUI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_5l48o")
+stretch_mode = 2
+
+[node name="Button" type="Button" parent="BuildingCardUI/BuildingCardUI"]
 layout_mode = 2
 text = "Buy"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BuildingCardUI/BuildingCardUI/Button" to="." method="_on_button_pressed"]

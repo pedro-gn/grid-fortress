@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn25aqgr41mui"]
+
+[ext_resource type="Script" uid="uid://bgvob6f717s5y" path="res://UI/waves_ui/waves_ui.gd" id="1_vuxy6"]
+
+[node name="WavesUi" type="Control" node_paths=PackedStringArray("timer_label", "wave_label")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_vuxy6")
+timer_label = NodePath("MarginContainer/PanelContainer/HBoxContainer/WaveLabel")
+wave_label = NodePath("MarginContainer/PanelContainer/HBoxContainer/Timerlabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="WaveLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "123"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Timerlabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "123"
+fit_content = true
+autowrap_mode = 0

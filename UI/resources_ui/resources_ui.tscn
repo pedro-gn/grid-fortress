@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://brnjk5u7seew8"]
+
+[ext_resource type="Texture2D" uid="uid://dx07dhjqhr6v8" path="res://sprites/DebtsInTheDepthsAssets/Environment/sprGoldPile.png" id="1_0ebtf"]
+[ext_resource type="Script" uid="uid://3lo1lpdmsqps" path="res://UI/resources_ui/resources_ui.gd" id="1_wuh4s"]
+
+[node name="ResourcesUi" type="Control" node_paths=PackedStringArray("gold_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wuh4s")
+gold_label = NodePath("HBoxContainer/RichTextLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_0ebtf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+text = "999999"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1

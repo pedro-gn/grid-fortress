@@ -1,8 +1,13 @@
+res://scenes/enemies/minotaur
+res://UI/health_bar
+res://scenes/enemies/goblin
+res://globals/global_effects
+res://UI/start_screen_ui
+res://globals
 res://resources/waves
 res://scenes/enemies/skeleton
 res://sprites
 res://
-res://globals
 res://scenes/grid_buildings/mage_tower
 res://resources/grid_buildings
 res://scenes/grid_buildings/archer_tower

@@ -2,6 +2,8 @@ extends Node2D
 class_name Grid
 
 @export var grid_slot_scene: PackedScene
+@export var resources_manager : ResourcesManager
+
 
 @export_category("Dimensões da Grid")
 @export var width: int = 10
@@ -93,8 +95,17 @@ func has_free_slot() -> bool:
 			return true
 	return false
 
+func can_buy(building : GridBuildingData) -> bool:
+	var gold_qnt = resources_manager.get_gold_qnt()
+	
+	if gold_qnt >= building.gold_cost :
+		return true
+		
+	return false
+
 func _on_building_card_ui_clicked(building : GridBuildingData):
-	if has_free_slot():
+	if has_free_slot() and can_buy(building):
 		var building_instance : GridBuildingBase = building.building_scene.instantiate()
 		add_child(building_instance)
 		selected_building = building_instance
+		resources_manager.add_gold(-1 * building.gold_cost)

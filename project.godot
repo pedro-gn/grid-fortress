@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GridFortress"
-run/main_scene="uid://dygxckdtyhci7"
+run/main_scene="uid://bs6i7dyuvd5ln"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Databases="*res://globals/databases.gd"
 SignalBus="*res://globals/signal_bus.gd"
+GameManager="*res://globals/game_manager.gd"
+GlobalEffects="*res://globals/global_effects/global_effects.gd"
 
 [display]
 

@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://bfvme0ondmbwj"]
+
+[ext_resource type="PackedScene" uid="uid://cr3eh75sskexx" path="res://scenes/enemies/enemy_base.tscn" id="1_pyewx"]
+[ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="2_7t6sf"]
+[ext_resource type="Texture2D" uid="uid://cp4qwsqol2adb" path="res://sprites/DebtsInTheDepthsAssets/Characters/sprMinotaur1.png" id="2_dn7kv"]
+[ext_resource type="Script" uid="uid://6n4uc50s0df5" path="res://resources/health.gd" id="2_taldm"]
+[ext_resource type="PackedScene" uid="uid://b3tinmrtcut4j" path="res://UI/health_bar/health_bar.tscn" id="5_rf5p4"]
+
+[sub_resource type="Resource" id="Resource_764ix"]
+script = ExtResource("2_taldm")
+max_health = 20.0
+physical_armor = 5.0
+magic_defense = 5.0
+metadata/_custom_type_script = "uid://6n4uc50s0df5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rf5p4"]
+size = Vector2(16, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_taldm"]
+size = Vector2(12, 21)
+
+[sub_resource type="Animation" id="Animation_7t6sf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flipper/Sprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_dn7kv"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flipper/Sprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20393778),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(1, 0.25), Vector2(0.85, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_saqhc"]
+_data = {
+&"RESET": SubResource("Animation_7t6sf"),
+&"walk": SubResource("Animation_dn7kv")
+}
+
+[node name="Minotaur" node_paths=PackedStringArray("health_component") instance=ExtResource("1_pyewx")]
+movement_speed = 50.0
+tower_damage = 5.0
+gold_value = 5
+health_component = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("hurt_box", "health_bar")]
+health_data = SubResource("Resource_764ix")
+hurt_box = NodePath("../HurtBox")
+health_bar = NodePath("../TextureProgressBar")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(3, 0.5)
+shape = SubResource("RectangleShape2D_rf5p4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Flipper" index="0"]
+modulate = Color(1, 1, 1, 0.33333334)
+position = Vector2(0.9999999, 12)
+scale = Vector2(1, 0.25)
+texture = ExtResource("2_7t6sf")
+
+[node name="Sprite2D" parent="Flipper" index="1"]
+texture = ExtResource("2_dn7kv")
+hframes = 4
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(3, 0.5)
+shape = SubResource("RectangleShape2D_taldm")
+
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_saqhc")
+}
+autoplay = "walk"
+
+[node name="TextureProgressBar" parent="." index="6" instance=ExtResource("5_rf5p4")]
+offset_top = -13.0
+offset_bottom = -11.0

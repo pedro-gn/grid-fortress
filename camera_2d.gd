@@ -8,7 +8,7 @@ var velocity := Vector2.ZERO
 # --- Zoom Vars ---
 @export_category("Zoom")
 @export var min_zoom := 1   
-@export var max_zoom := 3.0   
+@export var max_zoom := 2
 @export var zoom_sensitivity := 0.1 # How much each scroll step adds/subtracts
 @export var zoom_smoothing := 8.0   # How fast the zoom interpolates
 

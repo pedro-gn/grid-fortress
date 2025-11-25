@@ -7,7 +7,6 @@ class_name Health
 
 var current_health
 
-
 func init() -> void:
 	current_health = max_health
 

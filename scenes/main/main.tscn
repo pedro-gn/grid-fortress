@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dygxckdtyhci7"]
+[gd_scene load_steps=15 format=3 uid="uid://dygxckdtyhci7"]
 
 [ext_resource type="PackedScene" uid="uid://dik4ntlalso2m" path="res://scenes/grid/grid.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cg6v8qa0rwmei" path="res://scenes/main/main.gd" id="1_kek77"]
 [ext_resource type="PackedScene" uid="uid://ckk4013pg116g" path="res://UI/buildings_ui/buildings_ui.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://duhfq6bqyv2xi" path="res://classes/resourses_manager.gd" id="2_ouso4"]
 [ext_resource type="Script" uid="uid://c6ioe07xstj6l" path="res://camera_2d.gd" id="3_lquwl"]
 [ext_resource type="Script" uid="uid://2w8ygf6ashej" path="res://root_ui.gd" id="4_4c57u"]
 [ext_resource type="PackedScene" uid="uid://tv4hfvviidcf" path="res://UI/tower_health_ui/tower_health_ui.tscn" id="4_5vw27"]
@@ -10,12 +11,20 @@
 [ext_resource type="Script" uid="uid://d14mi721j07ng" path="res://resources/wave.gd" id="5_272bh"]
 [ext_resource type="Resource" uid="uid://y1cvua6qnydm" path="res://resources/waves/wave1.tres" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cednbfyjyxvvb" path="res://scenes/tower/tower.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://brnjk5u7seew8" path="res://UI/resources_ui/resources_ui.tscn" id="8_blune"]
+[ext_resource type="PackedScene" uid="uid://cn25aqgr41mui" path="res://UI/waves_ui/waves_ui.tscn" id="9_th5th"]
+[ext_resource type="Resource" uid="uid://rtkf0brhm0wq" path="res://resources/waves/wave2.tres" id="13_7smn1"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kek77")
 
-[node name="Grid" parent="." instance=ExtResource("1_ig7tw")]
+[node name="ResourcesManager" type="Node" parent="."]
+script = ExtResource("2_ouso4")
+metadata/_custom_type_script = "uid://duhfq6bqyv2xi"
+
+[node name="Grid" parent="." node_paths=PackedStringArray("resources_manager") instance=ExtResource("1_ig7tw")]
 position = Vector2(40, 40)
+resources_manager = NodePath("../ResourcesManager")
 width = 15
 spacing = Vector2(80, 80)
 
@@ -23,10 +32,14 @@ spacing = Vector2(80, 80)
 position = Vector2(595, 394)
 script = ExtResource("3_lquwl")
 
-[node name="RootUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("tower", "tower_health_ui")]
+[node name="RootUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("tower", "resource_manager", "spawner", "tower_health_ui", "resources_ui", "waves_ui")]
 script = ExtResource("4_4c57u")
 tower = NodePath("../Tower")
+resource_manager = NodePath("../ResourcesManager")
+spawner = NodePath("../EnemySpawner")
 tower_health_ui = NodePath("TowerHealthUi")
+resources_ui = NodePath("ResourcesUi")
+waves_ui = NodePath("WavesUi")
 
 [node name="BuildingsUi" parent="RootUI" instance=ExtResource("2_0xm2m")]
 
@@ -42,16 +55,37 @@ offset_bottom = 24.0
 grow_horizontal = 0
 grow_vertical = 1
 
+[node name="ResourcesUi" parent="RootUI" instance=ExtResource("8_blune")]
+anchors_preset = -1
+anchor_top = 0.96700007
+anchor_right = 0.033
+offset_left = 1.0
+offset_top = -0.36010742
+offset_right = -62.36
+offset_bottom = -36.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="WavesUi" parent="RootUI" instance=ExtResource("9_th5th")]
+anchors_preset = -1
+anchor_left = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.040000003
+offset_left = 880.0
+offset_top = 1.0
+offset_right = -1040.0
+offset_bottom = -42.200005
+
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_points")]
 script = ExtResource("4_7mycd")
-waves = Array[ExtResource("5_272bh")]([ExtResource("6_5vw27")])
+waves = Array[ExtResource("5_272bh")]([ExtResource("6_5vw27"), ExtResource("13_7smn1")])
 spawn_points = [NodePath("../SpawnPoints/Marker2D"), NodePath("../SpawnPoints/Marker2D"), NodePath("../SpawnPoints/Marker2D2"), NodePath("../SpawnPoints/Marker2D3"), NodePath("../SpawnPoints/Marker2D4"), NodePath("../SpawnPoints/Marker2D5"), NodePath("../SpawnPoints/Marker2D6"), NodePath("../SpawnPoints/Marker2D7"), NodePath("../SpawnPoints/Marker2D8"), NodePath("../SpawnPoints/Marker2D9"), NodePath("../SpawnPoints/Marker2D10"), NodePath("../SpawnPoints/Marker2D11"), NodePath("../SpawnPoints/Marker2D12"), NodePath("../SpawnPoints/Marker2D13"), NodePath("../SpawnPoints/Marker2D14"), NodePath("../SpawnPoints/Marker2D15"), NodePath("../SpawnPoints/Marker2D16"), NodePath("../SpawnPoints/Marker2D17"), NodePath("../SpawnPoints/Marker2D18"), NodePath("../SpawnPoints/Marker2D19")]
 autostart = true
 metadata/_custom_type_script = "uid://but15ubm2db5y"
 
 [node name="Tower" parent="." groups=["Castle"] instance=ExtResource("7_272bh")]
 position = Vector2(608, -48)
-tower_max_health = 10.0
+tower_max_health = 4.0
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 

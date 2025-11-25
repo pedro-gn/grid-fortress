@@ -9,4 +9,5 @@ script = ExtResource("1_5sh4q")
 building_name = "Archer Tower"
 sprite = ExtResource("3_ljxje")
 building_scene = ExtResource("1_do78b")
+gold_cost = 5
 metadata/_custom_type_script = "uid://dddlhl1uoikaj"

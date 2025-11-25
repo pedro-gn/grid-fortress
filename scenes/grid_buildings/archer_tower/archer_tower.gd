@@ -13,7 +13,6 @@ func _physics_process(_delta: float) -> void:
 		
 
 func shoot():
-	print("shoot")
 	projectile_spawner.shoot(target_acquisition_component.get_closest_target())
 	_can_shoot = false
 	await get_tree().create_timer(base_fire_rate).timeout

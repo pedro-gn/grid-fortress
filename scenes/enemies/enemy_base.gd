@@ -5,13 +5,11 @@ class_name EnemyBase
 @export_category("Stats")
 @export var movement_speed: float = 100.0
 @export var tower_damage : float = 1
+@export var gold_value : int
 
 @export_category("Components")
 @export var health_component : HealthComponent
-
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-
-
 
 func _ready():
 	navigation_agent.path_desired_distance = 4
@@ -22,7 +20,9 @@ func _ready():
 
 func _on_died(_killed_by : Node2D):
 	queue_free()
-
+	GlobalEffects.spawn_effect(global_position, GlobalEffects.EFFECTS.GOLD_EARN, gold_value)
+	SignalBus.enemy_died.emit(gold_value)
+	
 func actor_setup():
 	await get_tree().physics_frame
 	set_movement_target(get_tree().get_first_node_in_group("Castle").global_position)
