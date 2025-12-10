@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://b3tinmrtcut4j" path="res://UI/health_bar/health_bar.tscn" id="5_rf5p4"]
 
 [sub_resource type="Resource" id="Resource_764ix"]
+resource_local_to_scene = true
 script = ExtResource("2_taldm")
-max_health = 20.0
-physical_armor = 5.0
-magic_defense = 5.0
+max_health = 160.0
+physical_armor = 40.0
 metadata/_custom_type_script = "uid://6n4uc50s0df5"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf5p4"]
@@ -83,9 +83,9 @@ _data = {
 }
 
 [node name="Minotaur" node_paths=PackedStringArray("health_component") instance=ExtResource("1_pyewx")]
-movement_speed = 50.0
+movement_speed = 20.0
 tower_damage = 5.0
-gold_value = 5
+gold_value = 10
 health_component = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("hurt_box", "health_bar")]

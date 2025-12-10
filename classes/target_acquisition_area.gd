@@ -1,10 +1,22 @@
 class_name TargetAcquisitionComponent extends Area2D
 
+@export var base_area_radius : float = 120
+@onready var buff_manager: BuffManager = %BuffManager
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var range_indicator: RangeIndicator = $"../RangeIndicator"
+
 var targets_in_range : Array[Node2D] = []
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	buff_manager.range_multiplier_changed.connect(_on_range_multiplier_changed)
+	collision_shape.shape.radius = base_area_radius
+	range_indicator.radius = base_area_radius
+
+func _on_range_multiplier_changed(new_multiplier : float):
+	collision_shape.shape.radius = base_area_radius * (1 + new_multiplier)
+	range_indicator.radius = base_area_radius * (1 + new_multiplier)
 
 func _on_body_entered(body : Node2D):
 	targets_in_range.append(body)

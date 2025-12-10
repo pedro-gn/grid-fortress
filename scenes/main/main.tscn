@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dygxckdtyhci7"]
+[gd_scene load_steps=25 format=3 uid="uid://dygxckdtyhci7"]
 
 [ext_resource type="PackedScene" uid="uid://dik4ntlalso2m" path="res://scenes/grid/grid.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cg6v8qa0rwmei" path="res://scenes/main/main.gd" id="1_kek77"]
@@ -14,6 +14,16 @@
 [ext_resource type="PackedScene" uid="uid://brnjk5u7seew8" path="res://UI/resources_ui/resources_ui.tscn" id="8_blune"]
 [ext_resource type="PackedScene" uid="uid://cn25aqgr41mui" path="res://UI/waves_ui/waves_ui.tscn" id="9_th5th"]
 [ext_resource type="Resource" uid="uid://rtkf0brhm0wq" path="res://resources/waves/wave2.tres" id="13_7smn1"]
+[ext_resource type="Resource" uid="uid://ckxlok6rbp3o4" path="res://resources/waves/wave3.tres" id="14_hxu8e"]
+[ext_resource type="PackedScene" uid="uid://bfvme0ondmbwj" path="res://scenes/enemies/minotaur/minotaur.tscn" id="15_raeie"]
+[ext_resource type="Resource" uid="uid://cqurlird25b0k" path="res://resources/waves/wave4.tres" id="15_s17dp"]
+[ext_resource type="Resource" uid="uid://biibqc8t2rvh0" path="res://resources/waves/wave5.tres" id="16_37hlw"]
+[ext_resource type="Resource" uid="uid://b5vl1itrib4x4" path="res://resources/waves/wave6.tres" id="17_6llfj"]
+[ext_resource type="Resource" uid="uid://d2qbt4qwatxqa" path="res://resources/waves/wave7.tres" id="18_0bhws"]
+[ext_resource type="Resource" uid="uid://bwrfb7kdfrdat" path="res://resources/waves/wave8.tres" id="19_62atk"]
+[ext_resource type="Resource" uid="uid://mqeb770y81v4" path="res://resources/waves/wave9.tres" id="20_i7in8"]
+[ext_resource type="Resource" uid="uid://d2nrie7ipstss" path="res://resources/waves/wave10.tres" id="21_gkmcc"]
+[ext_resource type="Resource" uid="uid://d2p04ra377rlc" path="res://resources/waves/wave11.tres" id="22_7nlll"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kek77")
@@ -25,11 +35,12 @@ metadata/_custom_type_script = "uid://duhfq6bqyv2xi"
 [node name="Grid" parent="." node_paths=PackedStringArray("resources_manager") instance=ExtResource("1_ig7tw")]
 position = Vector2(40, 40)
 resources_manager = NodePath("../ResourcesManager")
-width = 15
+width = 10
 spacing = Vector2(80, 80)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(595, 394)
+zoom = Vector2(2, 2)
 script = ExtResource("3_lquwl")
 
 [node name="RootUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("tower", "resource_manager", "spawner", "tower_health_ui", "resources_ui", "waves_ui")]
@@ -57,34 +68,23 @@ grow_vertical = 1
 
 [node name="ResourcesUi" parent="RootUI" instance=ExtResource("8_blune")]
 anchors_preset = -1
-anchor_top = 0.96700007
-anchor_right = 0.033
-offset_left = 1.0
-offset_top = -0.36010742
-offset_right = -62.36
-offset_bottom = -36.0
-grow_horizontal = 1
-grow_vertical = 0
+anchor_left = 0.19000001
+anchor_right = 0.246
+anchor_bottom = 0.028
+offset_left = 1.1999817
+offset_right = -0.32000732
+offset_bottom = -0.24000168
 
 [node name="WavesUi" parent="RootUI" instance=ExtResource("9_th5th")]
-anchors_preset = -1
-anchor_left = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.040000003
-offset_left = 880.0
-offset_top = 1.0
-offset_right = -1040.0
-offset_bottom = -42.200005
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_points")]
 script = ExtResource("4_7mycd")
-waves = Array[ExtResource("5_272bh")]([ExtResource("6_5vw27"), ExtResource("13_7smn1")])
-spawn_points = [NodePath("../SpawnPoints/Marker2D"), NodePath("../SpawnPoints/Marker2D"), NodePath("../SpawnPoints/Marker2D2"), NodePath("../SpawnPoints/Marker2D3"), NodePath("../SpawnPoints/Marker2D4"), NodePath("../SpawnPoints/Marker2D5"), NodePath("../SpawnPoints/Marker2D6"), NodePath("../SpawnPoints/Marker2D7"), NodePath("../SpawnPoints/Marker2D8"), NodePath("../SpawnPoints/Marker2D9"), NodePath("../SpawnPoints/Marker2D10"), NodePath("../SpawnPoints/Marker2D11"), NodePath("../SpawnPoints/Marker2D12"), NodePath("../SpawnPoints/Marker2D13"), NodePath("../SpawnPoints/Marker2D14"), NodePath("../SpawnPoints/Marker2D15"), NodePath("../SpawnPoints/Marker2D16"), NodePath("../SpawnPoints/Marker2D17"), NodePath("../SpawnPoints/Marker2D18"), NodePath("../SpawnPoints/Marker2D19")]
-autostart = true
+waves = Array[ExtResource("5_272bh")]([ExtResource("6_5vw27"), ExtResource("13_7smn1"), ExtResource("14_hxu8e"), ExtResource("15_s17dp"), ExtResource("16_37hlw"), ExtResource("17_6llfj"), ExtResource("18_0bhws"), ExtResource("19_62atk"), ExtResource("20_i7in8"), ExtResource("21_gkmcc"), ExtResource("22_7nlll")])
+spawn_points = [NodePath("../SpawnPoints/Marker2D"), NodePath("../SpawnPoints/Marker2D"), NodePath("../SpawnPoints/Marker2D2"), NodePath("../SpawnPoints/Marker2D3"), NodePath("../SpawnPoints/Marker2D4"), NodePath("../SpawnPoints/Marker2D5"), NodePath("../SpawnPoints/Marker2D6"), NodePath("../SpawnPoints/Marker2D7"), NodePath("../SpawnPoints/Marker2D8"), NodePath("../SpawnPoints/Marker2D9"), NodePath("../SpawnPoints/Marker2D10"), NodePath("../SpawnPoints/Marker2D11"), NodePath("../SpawnPoints/Marker2D12"), NodePath("../SpawnPoints/Marker2D13")]
 metadata/_custom_type_script = "uid://but15ubm2db5y"
 
 [node name="Tower" parent="." groups=["Castle"] instance=ExtResource("7_272bh")]
-position = Vector2(608, -48)
+position = Vector2(443, -95)
 tower_max_health = 4.0
 
 [node name="SpawnPoints" type="Node2D" parent="."]
@@ -128,20 +128,5 @@ position = Vector2(736, 1025)
 [node name="Marker2D13" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(800, 1025)
 
-[node name="Marker2D14" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(864, 1025)
-
-[node name="Marker2D15" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(928, 1025)
-
-[node name="Marker2D16" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(992, 1025)
-
-[node name="Marker2D17" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1056, 1025)
-
-[node name="Marker2D18" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1120, 1025)
-
-[node name="Marker2D19" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1184, 1025)
+[node name="Minotaur" parent="." instance=ExtResource("15_raeie")]
+position = Vector2(612, 591)

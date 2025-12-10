@@ -9,5 +9,6 @@ script = ExtResource("1_eeo63")
 building_name = "Mage Tower"
 sprite = ExtResource("2_r6uua")
 building_scene = ExtResource("1_7k7f7")
-gold_cost = 8
+gold_cost = 40
+description = "Fires bolts of pure energy at single enemies. Deals Magic Damage."
 metadata/_custom_type_script = "uid://dddlhl1uoikaj"

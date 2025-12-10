@@ -9,5 +9,6 @@ script = ExtResource("1_5sh4q")
 building_name = "Archer Tower"
 sprite = ExtResource("3_ljxje")
 building_scene = ExtResource("1_do78b")
-gold_cost = 5
+gold_cost = 25
+description = "The Archer Tower focuses on single-target elimination. It deals Physical Damage and operates at a Medium Fire Rate. Best used to pick off stragglers or focus down light infantry"
 metadata/_custom_type_script = "uid://dddlhl1uoikaj"

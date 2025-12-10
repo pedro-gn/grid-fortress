@@ -11,7 +11,13 @@ class_name EnemyBase
 @export var health_component : HealthComponent
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
+@export_category("Debug")
+@export var move : bool = true
+
 func _ready():
+	if move == false:
+		return
+	
 	navigation_agent.path_desired_distance = 4
 	navigation_agent.target_desired_distance = 4.0
 	health_component.died.connect(_on_died)
@@ -31,6 +37,9 @@ func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
 
 func _physics_process(_delta):
+	if move == false:
+		return
+		
 	if navigation_agent.is_navigation_finished():
 		return
 

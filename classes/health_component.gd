@@ -1,5 +1,6 @@
 class_name HealthComponent extends Node
 
+@warning_ignore("unused_signal")
 signal damage_taken(damage : float, knockback_force : Vector2, damage_dealer : Node2D)
 signal health_changed(health_data : Health)
 signal died(killed_by : Node2D)
@@ -19,6 +20,14 @@ func _ready():
 func restore_full_health():
 	pass
 
+func _process(delta: float) -> void:
+	health_data.tick(delta)
+	health_changed.emit(health_data)
+	if health_bar:
+		health_bar.max_value = health_data.max_health
+		health_bar.value = health_data.current_health
+	if health_data.current_health <= 0:
+		died.emit(null)
 
 func _on_hurt_box_damage_taken(damage : Damage, damage_dealer : Node2D):
 	health_data.take_damage(damage)

@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://csjkvhl48vgrf"]
+
+[ext_resource type="Script" uid="uid://dfbcr6aobf3qs" path="res://classes/projectile.gd" id="1_b7qge"]
+[ext_resource type="Texture2D" uid="uid://p7raghdlrtw6" path="res://sprites/DebtsInTheDepthsAssets/Effects/sprMagicBolt.png" id="1_pcums"]
+[ext_resource type="Script" uid="uid://b5luyhbm8ingp" path="res://classes/hit_box.gd" id="3_os4lo"]
+[ext_resource type="Script" uid="uid://dkitqjq6ly3ls" path="res://resources/damage.gd" id="4_624od"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7qge"]
+size = Vector2(17, 8)
+
+[sub_resource type="Animation" id="Animation_b7qge"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pcums"]
+resource_name = "fly"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4qe6"]
+_data = {
+&"RESET": SubResource("Animation_b7qge"),
+&"fly": SubResource("Animation_pcums")
+}
+
+[sub_resource type="Resource" id="Resource_orbjo"]
+script = ExtResource("4_624od")
+magical_damage = 7.0
+metadata/_custom_type_script = "uid://dkitqjq6ly3ls"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_os4lo"]
+size = Vector2(17, 8)
+
+[node name="MagicBolt" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_b7qge")
+hit_box = NodePath("HitBox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pcums")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_b7qge")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u4qe6")
+}
+autoplay = "fly"
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_os4lo")
+damage_data = SubResource("Resource_orbjo")
+is_hit_limited = true
+metadata/_custom_type_script = "uid://b5luyhbm8ingp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_os4lo")

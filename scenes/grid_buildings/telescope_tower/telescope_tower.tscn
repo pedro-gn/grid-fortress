@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvila5dcxhrc6"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_317pv"]
+[ext_resource type="Texture2D" uid="uid://tu28eqdpjv51" path="res://sprites/telescope.png" id="2_1fiqp"]
+[ext_resource type="Script" uid="uid://b2r1dggywgshy" path="res://scenes/grid_buildings/telescope_tower/telescope_tower.gd" id="2_xfhc5"]
+[ext_resource type="PackedScene" uid="uid://bn8a4am2eus46" path="res://scenes/range_indicator/range_indicator.tscn" id="3_xfhc5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oxqth"]
+radius = 120.0
+
+[node name="TelescopeTower" instance=ExtResource("1_317pv")]
+script = ExtResource("2_xfhc5")
+range_multiplyer = 0.2
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1fiqp")
+
+[node name="InfluenceArea" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InfluenceArea" index="0"]
+shape = SubResource("CircleShape2D_oxqth")
+
+[node name="RangeIndicator" parent="." index="4" instance=ExtResource("3_xfhc5")]
+radius = 120.0
+
+[connection signal="body_entered" from="InfluenceArea" to="." method="_on_influence_area_body_entered"]
+[connection signal="body_exited" from="InfluenceArea" to="." method="_on_influence_area_body_exited"]

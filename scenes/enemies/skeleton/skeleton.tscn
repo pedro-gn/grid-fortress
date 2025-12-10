@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_g3bvy"]
 resource_local_to_scene = true
 script = ExtResource("6_j3pxm")
-max_health = 5.0
+max_health = 20.0
 metadata/_custom_type_script = "uid://6n4uc50s0df5"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4oa3"]
@@ -82,8 +82,8 @@ _data = {
 }
 
 [node name="Skeleton" node_paths=PackedStringArray("health_component") instance=ExtResource("1_t4oa3")]
-movement_speed = 50.0
-gold_value = 1
+movement_speed = 22.0
+gold_value = 4
 health_component = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("hurt_box", "health_bar")]

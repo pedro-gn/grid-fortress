@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://dvvbxi0dacumu"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_moa7t"]
+[ext_resource type="Texture2D" uid="uid://dwuic0lbvq7tb" path="res://sprites/acid_tower.png" id="2_8lcwy"]
+[ext_resource type="Script" uid="uid://b7lml5gjr1ine" path="res://scenes/grid_buildings/acid_tower/acid_tower.gd" id="2_f14gm"]
+[ext_resource type="Script" uid="uid://kf3lkc6t3ceb" path="res://classes/target_acquisition_area.gd" id="3_dloyh"]
+[ext_resource type="PackedScene" uid="uid://bn8a4am2eus46" path="res://scenes/range_indicator/range_indicator.tscn" id="4_thg15"]
+[ext_resource type="Script" uid="uid://4oh78on3h55u" path="res://classes/projectile_spawner.gd" id="5_thg15"]
+[ext_resource type="PackedScene" uid="uid://d4mhni3dgohi1" path="res://scenes/grid_buildings/acid_tower/acid_potion.tscn" id="6_jg6ek"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jg6ek"]
+radius = 200.0
+
+[node name="AcidTower" instance=ExtResource("1_moa7t")]
+script = ExtResource("2_f14gm")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_8lcwy")
+
+[node name="TargetAcquisitionComponent" type="Area2D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_dloyh")
+metadata/_custom_type_script = "uid://kf3lkc6t3ceb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAcquisitionComponent" index="0"]
+shape = SubResource("CircleShape2D_jg6ek")
+
+[node name="RangeIndicator" parent="." index="2" instance=ExtResource("4_thg15")]
+radius = 200.0
+
+[node name="ProjectileSpawner" type="Node2D" parent="." index="3" node_paths=PackedStringArray("target_acquisition_component", "buff_manager")]
+script = ExtResource("5_thg15")
+target_acquisition_component = NodePath("../TargetAcquisitionComponent")
+buff_manager = NodePath("../BuffManager")
+projectile_scene = ExtResource("6_jg6ek")
+projectile_speed = 300.0
+metadata/_custom_type_script = "uid://4oh78on3h55u"

@@ -3,32 +3,67 @@
 [ext_resource type="Script" uid="uid://druiq0som7acq" path="res://UI/buildings_ui/buildings_ui.gd" id="1_nkonj"]
 [ext_resource type="PackedScene" uid="uid://dgg2tfmm1to7t" path="res://UI/building_card_ui/building_card_ui.tscn" id="1_nqh3k"]
 
-[node name="BuildingsUi" type="Control" node_paths=PackedStringArray("grid_container")]
+[node name="BuildingsUi" type="Control" node_paths=PackedStringArray("grid_container", "description_label")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.19100001
 anchor_bottom = 1.0
+offset_right = 2.2799683
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_nkonj")
 building_card_scene = ExtResource("1_nqh3k")
-grid_container = NodePath("PanelContainer/MarginContainer/GridContainer")
+grid_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/GridContainer")
+description_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/CenterContainer/MarginContainer/RichTextLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 366.0
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
-columns = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(114.58, 740.285)
+layout_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+scroll_horizontal_custom_step = -0.1
+scroll_vertical_custom_step = -0.1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/MarginContainer"]
+custom_minimum_size = Vector2(280.84, 222)
+layout_mode = 2
+text = "Click on a tower to see the description."

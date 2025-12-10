@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4qv634wxrkn1"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_67g7d"]
+[ext_resource type="Texture2D" uid="uid://dr4dmxxe1w1x" path="res://sprites/mortar.png" id="2_3h6tw"]
+[ext_resource type="PackedScene" uid="uid://bn8a4am2eus46" path="res://scenes/range_indicator/range_indicator.tscn" id="2_bg2yh"]
+[ext_resource type="Script" uid="uid://cc1qpp1ss687k" path="res://scenes/grid_buildings/mortar/mortar.gd" id="2_emjsf"]
+[ext_resource type="Script" uid="uid://kf3lkc6t3ceb" path="res://classes/target_acquisition_area.gd" id="4_emjsf"]
+[ext_resource type="Script" uid="uid://4oh78on3h55u" path="res://classes/projectile_spawner.gd" id="6_7xexh"]
+[ext_resource type="PackedScene" uid="uid://c7g7oqr53nlfo" path="res://scenes/grid_buildings/mortar/mortar_bomb.tscn" id="7_w8xy0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xexh"]
+radius = 240.0
+
+[node name="Mortar" instance=ExtResource("1_67g7d")]
+script = ExtResource("2_emjsf")
+
+[node name="RangeIndicator" parent="." index="0" instance=ExtResource("2_bg2yh")]
+radius = 240.0
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_3h6tw")
+
+[node name="TargetAcquisitionComponent" type="Area2D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_emjsf")
+metadata/_custom_type_script = "uid://kf3lkc6t3ceb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAcquisitionComponent" index="0"]
+shape = SubResource("CircleShape2D_7xexh")
+
+[node name="ProjectileSpawner" type="Node2D" parent="." index="3" node_paths=PackedStringArray("target_acquisition_component", "buff_manager")]
+position = Vector2(0, 4)
+script = ExtResource("6_7xexh")
+base_fire_rate = 2.0
+target_acquisition_component = NodePath("../TargetAcquisitionComponent")
+buff_manager = NodePath("../BuffManager")
+projectile_scene = ExtResource("7_w8xy0")
+projectile_speed = 190.0
+metadata/_custom_type_script = "uid://4oh78on3h55u"

@@ -1,3 +1,13 @@
+C:/Users/pedro/Documents/grid-fortress/exports
+res://resources/grid_buildings
+res://scenes/grid_buildings/wall
+res://scenes/grid_buildings/drum_tower
+res://
+res://scenes/enemies/bat
+res://scenes/grid_buildings/ballista_tower
+res://scenes/grid_buildings/mortar
+res://scenes/range_indicator
+res://scenes/grid_buildings/gold_mine
 res://scenes/enemies/minotaur
 res://UI/health_bar
 res://scenes/enemies/goblin
@@ -7,7 +17,5 @@ res://globals
 res://resources/waves
 res://scenes/enemies/skeleton
 res://sprites
-res://
 res://scenes/grid_buildings/mage_tower
-res://resources/grid_buildings
 res://scenes/grid_buildings/archer_tower

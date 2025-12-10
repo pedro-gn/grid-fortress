@@ -21,8 +21,7 @@ func _ready() -> void:
 	target_zoom = zoom
 
 
-func _input(event: InputEvent) -> void:
-	# This function handles discrete events, like a single mouse click or scroll
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		
 		# Check for "Wheel Up"MOUSE_BUTTON_WHEEL_DOWN

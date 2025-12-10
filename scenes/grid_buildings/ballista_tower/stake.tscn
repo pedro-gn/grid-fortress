@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhrvgxtp02chf"]
+
+[ext_resource type="Script" uid="uid://gh0sow76iecw" path="res://scenes/grid_buildings/ballista_tower/stake.gd" id="1_s38e3"]
+[ext_resource type="Texture2D" uid="uid://ve2vxdcgxv7n" path="res://sprites/stake.png" id="1_yoh1s"]
+[ext_resource type="Script" uid="uid://b5luyhbm8ingp" path="res://classes/hit_box.gd" id="2_438fa"]
+[ext_resource type="Script" uid="uid://dkitqjq6ly3ls" path="res://resources/damage.gd" id="4_pb00x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_438fa"]
+size = Vector2(24, 4)
+
+[sub_resource type="Resource" id="Resource_jkfsp"]
+resource_local_to_scene = true
+script = ExtResource("4_pb00x")
+physical_damage = 8.0
+metadata/_custom_type_script = "uid://dkitqjq6ly3ls"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s38e3"]
+size = Vector2(24, 4)
+
+[node name="Stake" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_s38e3")
+hit_box = NodePath("HitBox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_438fa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yoh1s")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_438fa")
+damage_data = SubResource("Resource_jkfsp")
+is_hit_limited = true
+metadata/_custom_type_script = "uid://b5luyhbm8ingp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_s38e3")

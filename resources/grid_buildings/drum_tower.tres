@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GridBuildingData" load_steps=4 format=3 uid="uid://db56divlfbhw5"]
+
+[ext_resource type="Script" uid="uid://dddlhl1uoikaj" path="res://resources/grid_buildings_data.gd" id="1_7ekl2"]
+[ext_resource type="PackedScene" uid="uid://b2r6scxwv3mcl" path="res://scenes/grid_buildings/drum_tower/drum_tower.tscn" id="1_d500w"]
+[ext_resource type="Texture2D" uid="uid://ct8bpf27jhpu0" path="res://sprites/drum_tower.png" id="3_b4pdf"]
+
+[resource]
+script = ExtResource("1_7ekl2")
+building_name = "Drum Tower"
+sprite = ExtResource("3_b4pdf")
+building_scene = ExtResource("1_d500w")
+gold_cost = 50
+description = "Beats a frantic rhythm that increases the Attack Speed of all nearby towers"
+metadata/_custom_type_script = "uid://dddlhl1uoikaj"

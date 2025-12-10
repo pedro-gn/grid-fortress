@@ -1,20 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://b870uxmqx3q0s"]
+[gd_scene load_steps=9 format=3 uid="uid://b870uxmqx3q0s"]
 
 [ext_resource type="Script" uid="uid://dfbcr6aobf3qs" path="res://classes/projectile.gd" id="1_p85eq"]
 [ext_resource type="Texture2D" uid="uid://dme4samgsh1fs" path="res://sprites/arrow.png" id="2_tqcar"]
 [ext_resource type="Script" uid="uid://b5luyhbm8ingp" path="res://classes/hit_box.gd" id="3_agjw0"]
 [ext_resource type="Script" uid="uid://dkitqjq6ly3ls" path="res://resources/damage.gd" id="4_8yb3q"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqcar"]
-size = Vector2(16, 5)
+[ext_resource type="Texture2D" uid="uid://di4jb8oe15dix" path="res://sprites/shadow.png" id="5_r7tux"]
 
 [sub_resource type="Resource" id="Resource_r7tux"]
 script = ExtResource("4_8yb3q")
-physical_damage = 1.0
+physical_damage = 5.0
 metadata/_custom_type_script = "uid://dkitqjq6ly3ls"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_agjw0"]
-size = Vector2(16, 5)
+size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqcar"]
+size = Vector2(16, 4)
 
 [node name="Arrow" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
 collision_layer = 0
@@ -22,21 +23,28 @@ collision_mask = 0
 script = ExtResource("1_p85eq")
 hit_box = NodePath("HitBox")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_tqcar")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(-1, 1)
-texture = ExtResource("2_tqcar")
-
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("3_agjw0")
 damage_data = SubResource("Resource_r7tux")
+is_hit_limited = true
 metadata/_custom_type_script = "uid://b5luyhbm8ingp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_agjw0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tqcar")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_tqcar")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.2509804)
+position = Vector2(0, -0.12500003)
+scale = Vector2(0.8, 0.0875)
+texture = ExtResource("5_r7tux")
+flip_h = true

@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5cjteteuk86d"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_lhuo5"]
+[ext_resource type="Script" uid="uid://cnb3hvvvh267c" path="res://scenes/grid_buildings/ballista_tower/ballista_tower.gd" id="2_cqf08"]
+[ext_resource type="Texture2D" uid="uid://bv873t1yrxti1" path="res://sprites/sniper_tower.png" id="2_kfs6y"]
+[ext_resource type="Script" uid="uid://4oh78on3h55u" path="res://classes/projectile_spawner.gd" id="3_qr1kh"]
+[ext_resource type="PackedScene" uid="uid://bn8a4am2eus46" path="res://scenes/range_indicator/range_indicator.tscn" id="4_evkld"]
+[ext_resource type="PackedScene" uid="uid://bhrvgxtp02chf" path="res://scenes/grid_buildings/ballista_tower/stake.tscn" id="5_cqf08"]
+[ext_resource type="Script" uid="uid://kf3lkc6t3ceb" path="res://classes/target_acquisition_area.gd" id="5_evkld"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqrex"]
+resource_local_to_scene = true
+radius = 300.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqf08"]
+size = Vector2(80, 80)
+
+[node name="Ballista" instance=ExtResource("1_lhuo5")]
+script = ExtResource("2_cqf08")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_kfs6y")
+
+[node name="ProjectileSpawner" type="Node2D" parent="." index="1" node_paths=PackedStringArray("target_acquisition_component", "buff_manager")]
+script = ExtResource("3_qr1kh")
+base_fire_rate = 3.0
+target_acquisition_component = NodePath("../TargetAcquisitionComponent")
+buff_manager = NodePath("../BuffManager")
+projectile_scene = ExtResource("5_cqf08")
+projectile_speed = 800.0
+tracking_mode = 0
+metadata/_custom_type_script = "uid://4oh78on3h55u"
+
+[node name="RangeIndicator" parent="." index="2" instance=ExtResource("4_evkld")]
+radius = 300.0
+
+[node name="TargetAcquisitionComponent" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("5_evkld")
+base_area_radius = 300.0
+metadata/_custom_type_script = "uid://kf3lkc6t3ceb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAcquisitionComponent" index="0"]
+shape = SubResource("CircleShape2D_dqrex")
+
+[node name="CollisionShape2D" parent="." index="4"]
+shape = SubResource("RectangleShape2D_cqf08")

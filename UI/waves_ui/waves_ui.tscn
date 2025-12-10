@@ -1,40 +1,82 @@
-[gd_scene load_steps=2 format=3 uid="uid://cn25aqgr41mui"]
+[gd_scene load_steps=4 format=3 uid="uid://cn25aqgr41mui"]
 
 [ext_resource type="Script" uid="uid://bgvob6f717s5y" path="res://UI/waves_ui/waves_ui.gd" id="1_vuxy6"]
+[ext_resource type="Texture2D" uid="uid://cf3qei4r8nrhf" path="res://wave_progress_under-export.png" id="2_l4ge1"]
+[ext_resource type="Texture2D" uid="uid://bp0k8orm5vbve" path="res://wave_progress-export.png" id="3_8i6mq"]
 
-[node name="WavesUi" type="Control" node_paths=PackedStringArray("timer_label", "wave_label")]
+[node name="WavesUi" type="Control" node_paths=PackedStringArray("timer_label", "wave_label", "start_wave_button", "wave_progress_bar")]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vuxy6")
-timer_label = NodePath("MarginContainer/PanelContainer/HBoxContainer/WaveLabel")
-wave_label = NodePath("MarginContainer/PanelContainer/HBoxContainer/Timerlabel")
+timer_label = NodePath("CenterContainer/VBoxContainer/PanelContainer/HBoxContainer/WaveLabel")
+wave_label = NodePath("CenterContainer/VBoxContainer/PanelContainer/HBoxContainer/Timerlabel")
+start_wave_button = NodePath("CenterContainer2/VBoxContainer/Button")
+wave_progress_bar = NodePath("CenterContainer2/VBoxContainer/TextureProgressBar")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_top = 20
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48200002
+anchor_right = 0.518
+anchor_bottom = 0.021000002
+offset_left = 0.5599365
+offset_right = -0.55999756
+offset_bottom = 0.3199978
+grow_horizontal = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="WaveLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="WaveLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "123"
 fit_content = true
 autowrap_mode = 0
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Timerlabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="Timerlabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "123"
 fit_content = true
 autowrap_mode = 0
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.892
+anchor_top = 0.81700003
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.64001465
+offset_top = -0.3600464
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 21
+
+[node name="Button" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Start Wave"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+value = 60.0
+fill_mode = 5
+texture_under = ExtResource("2_l4ge1")
+texture_progress = ExtResource("3_8i6mq")

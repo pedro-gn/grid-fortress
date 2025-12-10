@@ -1,6 +1,7 @@
-extends Node2D
-
+extends AnimatableBody2D
 class_name GridBuildingBase
+
+@onready var buff_manager: BuffManager = %BuffManager
 
 var _is_dragging : bool
 

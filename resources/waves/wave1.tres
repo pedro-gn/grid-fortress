@@ -6,12 +6,12 @@
 [sub_resource type="Resource" id="Resource_w1tnr"]
 script = ExtResource("1_1102q")
 enemy_name = "skeleton"
-enemy_count = 5
-spawn_interval = 1.0
+enemy_count = 4
+spawn_interval = 2.2
 metadata/_custom_type_script = "uid://cs50hmvbu4pcc"
 
 [resource]
 script = ExtResource("1_a4hey")
 enemies = Array[ExtResource("1_1102q")]([SubResource("Resource_w1tnr")])
-time_until_next_wave = 5.0
+time_until_next_wave = 20.0
 metadata/_custom_type_script = "uid://d14mi721j07ng"

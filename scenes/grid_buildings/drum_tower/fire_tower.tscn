@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://mwey1n5nruto"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_46wv6"]
+
+[node name="GridBuildingBase" instance=ExtResource("1_46wv6")]

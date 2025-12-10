@@ -5,10 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://dx07dhjqhr6v8" path="res://sprites/DebtsInTheDepthsAssets/Environment/sprGoldPile.png" id="3_5l48o"]
 
 [node name="BuildingCardUI" type="PanelContainer" node_paths=PackedStringArray("_texture_rect", "name_label", "price_label")]
-offset_left = 10.0
-offset_top = 9.0
-offset_right = 141.0
-offset_bottom = 201.0
+offset_left = 12.999999
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 173.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(66, 84)
 script = ExtResource("1_iap48")
 _texture_rect = NodePath("BuildingCardUI/BuildingCardUI/CenterContainer/TextureRect")
 name_label = NodePath("BuildingCardUI/BuildingCardUI/RichTextLabel")
@@ -54,8 +56,6 @@ layout_mode = 2
 texture = ExtResource("3_5l48o")
 stretch_mode = 2
 
-[node name="Button" type="Button" parent="BuildingCardUI/BuildingCardUI"]
-layout_mode = 2
-text = "Buy"
-
-[connection signal="pressed" from="BuildingCardUI/BuildingCardUI/Button" to="." method="_on_button_pressed"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

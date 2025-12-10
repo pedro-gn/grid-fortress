@@ -13,4 +13,4 @@ func _on_start_button_pressed():
 	GameManager.load_scene(GameManager.SCENES.MAIN)
 
 func _on_exit_button_pressed():
-	pass
+	get_tree().quit()

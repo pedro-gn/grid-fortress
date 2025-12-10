@@ -82,11 +82,16 @@ func _input(event: InputEvent) -> void:
 				selected_building.global_position = selected_slot.global_position
 			else:
 				selected_building.queue_free()
+
+		selected_building.set_is_dragging(false)
 		selected_slot = null
 		selected_building = null
+		
 	elif event.is_action_released("left_mouse_click") and !selected_building and _hovered_slot:
-		selected_building = _hovered_slot.grid_building
-		selected_slot = _hovered_slot
+		if _hovered_slot.grid_building:
+			selected_building = _hovered_slot.grid_building
+			selected_slot = _hovered_slot
+			selected_building.set_is_dragging(true)
 
 
 func has_free_slot() -> bool:
@@ -108,4 +113,5 @@ func _on_building_card_ui_clicked(building : GridBuildingData):
 		var building_instance : GridBuildingBase = building.building_scene.instantiate()
 		add_child(building_instance)
 		selected_building = building_instance
+		selected_building.set_is_dragging(true)
 		resources_manager.add_gold(-1 * building.gold_cost)

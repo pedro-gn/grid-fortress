@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7yw1fecdgy8r"]
+[gd_scene load_steps=4 format=3 uid="uid://c7yw1fecdgy8r"]
 
-[ext_resource type="Script" uid="uid://betovaxwsbq8v" path="res://classes/grid_building_base.gd" id="1_igpaq"]
+[ext_resource type="Script" uid="uid://betovaxwsbq8v" path="res://scenes/grid_buildings/grid_building_base.gd" id="1_igpaq"]
+[ext_resource type="Script" uid="uid://ch7svwk5kl0f6" path="res://classes/buff_manager.gd" id="2_igpaq"]
 
-[node name="GridBuildingBase" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tsrab"]
+size = Vector2(80, 80)
+
+[node name="GridBuildingBase" type="AnimatableBody2D"]
+collision_layer = 512
+collision_mask = 0
 script = ExtResource("1_igpaq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tsrab")
+
+[node name="BuffManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_igpaq")
+metadata/_custom_type_script = "uid://ch7svwk5kl0f6"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GridBuildingData" load_steps=4 format=3 uid="uid://c0f5o48qofq71"]
+
+[ext_resource type="PackedScene" uid="uid://dgwf62lfq6vgt" path="res://scenes/grid_buildings/gold_mine/gold_mine.tscn" id="1_1oof0"]
+[ext_resource type="Script" uid="uid://dddlhl1uoikaj" path="res://resources/grid_buildings_data.gd" id="1_gfdd7"]
+[ext_resource type="Texture2D" uid="uid://c0krk64sp3naa" path="res://sprites/gold_mine.png" id="3_f4f6g"]
+
+[resource]
+script = ExtResource("1_gfdd7")
+building_name = "Gold Mine"
+sprite = ExtResource("3_f4f6g")
+building_scene = ExtResource("1_1oof0")
+gold_cost = 30
+description = "Generates wealth over time. Produces 2 Gold every 5 seconds."
+metadata/_custom_type_script = "uid://dddlhl1uoikaj"

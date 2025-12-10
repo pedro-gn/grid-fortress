@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2r6scxwv3mcl"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_ipmx1"]
+[ext_resource type="Script" uid="uid://cmd0l6lhc2ce7" path="res://scenes/grid_buildings/drum_tower/drum_tower.gd" id="2_8wy44"]
+[ext_resource type="Texture2D" uid="uid://ct8bpf27jhpu0" path="res://sprites/drum_tower.png" id="2_fh3le"]
+[ext_resource type="PackedScene" uid="uid://bn8a4am2eus46" path="res://scenes/range_indicator/range_indicator.tscn" id="3_hsd8x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8wy44"]
+radius = 120.0
+
+[node name="DrumTower" instance=ExtResource("1_ipmx1")]
+script = ExtResource("2_8wy44")
+attack_speed_buff = 0.1
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_fh3le")
+
+[node name="RangeIndicator" parent="." index="1" instance=ExtResource("3_hsd8x")]
+radius = 120.0
+
+[node name="InfluenceArea" type="Area2D" parent="." index="2"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InfluenceArea" index="0"]
+shape = SubResource("CircleShape2D_8wy44")
+
+[connection signal="body_entered" from="InfluenceArea" to="." method="_on_influence_area_body_entered"]
+[connection signal="body_exited" from="InfluenceArea" to="." method="_on_influence_area_body_exited"]

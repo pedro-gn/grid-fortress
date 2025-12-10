@@ -1,9 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxn8pplp1bsi1"]
+[gd_scene load_steps=9 format=3 uid="uid://bxn8pplp1bsi1"]
 
 [ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_dimcm"]
+[ext_resource type="Script" uid="uid://bsvnexvdjf40s" path="res://scenes/grid_buildings/mage_tower/mage_tower.gd" id="2_608m0"]
 [ext_resource type="Texture2D" uid="uid://cgbyagtsovay5" path="res://sprites/mage_tower.png" id="2_iijcc"]
+[ext_resource type="Script" uid="uid://4oh78on3h55u" path="res://classes/projectile_spawner.gd" id="4_ui8c8"]
+[ext_resource type="Script" uid="uid://kf3lkc6t3ceb" path="res://classes/target_acquisition_area.gd" id="5_5m57r"]
+[ext_resource type="PackedScene" uid="uid://csjkvhl48vgrf" path="res://scenes/grid_buildings/mage_tower/magic_bolt.tscn" id="5_jklwu"]
+[ext_resource type="PackedScene" uid="uid://bn8a4am2eus46" path="res://scenes/range_indicator/range_indicator.tscn" id="7_woa4c"]
 
-[node name="GridBuildingBase" instance=ExtResource("1_dimcm")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jklwu"]
+radius = 140.0
+
+[node name="MageTower" instance=ExtResource("1_dimcm")]
+script = ExtResource("2_608m0")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_iijcc")
+
+[node name="ProjectileSpawner" type="Node2D" parent="." index="1" node_paths=PackedStringArray("target_acquisition_component", "buff_manager")]
+position = Vector2(0, -16)
+script = ExtResource("4_ui8c8")
+base_fire_rate = 1.3
+target_acquisition_component = NodePath("../TargetAcquisitionComponent")
+buff_manager = NodePath("../BuffManager")
+projectile_scene = ExtResource("5_jklwu")
+projectile_speed = 400.0
+spawn_height = 0.0
+motion_style = 0
+tracking_mode = 0
+metadata/_custom_type_script = "uid://4oh78on3h55u"
+
+[node name="TargetAcquisitionComponent" type="Area2D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("5_5m57r")
+metadata/_custom_type_script = "uid://kf3lkc6t3ceb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetAcquisitionComponent" index="0"]
+shape = SubResource("CircleShape2D_jklwu")
+
+[node name="RangeIndicator" parent="." index="3" instance=ExtResource("7_woa4c")]
+radius = 140.0

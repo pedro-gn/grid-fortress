@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://p6feyypeu4v7"]
+
+[ext_resource type="PackedScene" uid="uid://c7yw1fecdgy8r" path="res://scenes/grid_buildings/grid_building_base.tscn" id="1_ftdwi"]
+[ext_resource type="Texture2D" uid="uid://b4aidlg1kcjhb" path="res://sprites/wall.png" id="2_5y2ps"]
+
+[node name="GridBuildingBase" instance=ExtResource("1_ftdwi")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_5y2ps")
